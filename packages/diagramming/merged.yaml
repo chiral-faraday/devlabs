@@ -1,0 +1,36 @@
+name: docker
+services:
+  excalidraw:
+    environment:
+      KROKI_EXCALIDRAW_ASSET_PATH: /opt/excalidraw-assets
+    expose:
+      - "8004"
+    image: yuzutech/kroki-excalidraw
+    networks:
+      krokinet: null
+    volumes:
+      - type: bind
+        source: /home/nous/projects/active/labs/devlabs/packages/diagramming/docker/volumes/excalidraw/assets
+        target: /opt/excalidraw-assets
+        bind: {}
+  kroki:
+    depends_on:
+      excalidraw:
+        condition: service_started
+        required: true
+    environment:
+      KROKI_EXCALIDRAW_HOST: excalidraw
+    image: yuzutech/kroki
+    networks:
+      krokinet: null
+    ports:
+      - mode: ingress
+        target: 8000
+        published: "8090"
+        protocol: tcp
+    tmpfs:
+      - /tmp:exec
+networks:
+  krokinet:
+    name: krokinet
+    external: true

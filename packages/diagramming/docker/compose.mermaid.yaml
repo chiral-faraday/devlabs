@@ -1,0 +1,19 @@
+services:
+  kroki:
+    extends:
+      file: ./compose.yaml
+      service: kroki
+    environment:
+      KROKI_MERMAID_HOST: mermaid
+    depends_on:
+      - mermaid
+  mermaid:
+    container_name: kroki-mermaid-container
+    image: yuzutech/kroki-mermaid
+    expose:
+      - "8002"
+    networks:
+      - krokinet
+networks:
+  krokinet:
+    external: true

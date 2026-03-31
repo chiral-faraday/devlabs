@@ -1,0 +1,23 @@
+services:
+  kroki:
+    extends:
+      file: ./compose.yaml
+      service: kroki
+    environment:
+      KROKI_EXCALIDRAW_HOST: excalidraw
+    depends_on:
+      - excalidraw
+  excalidraw:
+    container_name: kroki-excalidraw-container
+    image: yuzutech/kroki-excalidraw
+    environment:
+      KROKI_EXCALIDRAW_ASSET_PATH: /opt/excalidraw-assets
+    expose:
+      - "8004"
+    networks:
+      - krokinet
+    volumes:
+      - ./volumes/excalidraw/assets:/opt/excalidraw-assets
+networks:
+  krokinet:
+    external: true

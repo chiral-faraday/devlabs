@@ -1,0 +1,31 @@
+{
+  "name": "@chiral/diagramming",
+  "version": "0.1.0",
+  "description": "Containerized diagramming lab environment",
+  "keywords": [
+    "docker",
+    "container",
+    "dev",
+    "lab",
+    "environment"
+  ],
+  "license": "MIT",
+  "author": "chiral-faraday",
+  "type": "module",
+  "main": "index.js",
+  "scripts": {    
+    "build": "tsc -b",
+    "test": "jest",
+    "init:krokinet": "docker network inspect krokinet >/dev/null 2>&1 || docker network create krokinet",
+    "up:bpmn": "docker compose -f docker/compose.bpmn.yaml up -d",
+    "down:bpmn": "docker compose -f docker/compose.bpmn.yaml down",
+    "up:diagramsnet": "docker compose -f docker/compose.diagramsnet.yaml up -d",
+    "down:diagramsnet": "docker compose -f docker/compose.diagramsnet.yaml down",
+    "up:excalidraw": "docker compose -f docker/compose.excalidraw.yaml up -d",
+    "down:excalidraw": "docker compose -f docker/compose.excalidraw.yaml down",
+    "up:kroki": "docker compose -f docker/compose.yaml up -d",
+    "down:kroki": "docker compose -f docker/compose.yaml down",
+    "up:mermaid": "docker compose -f docker/compose.mermaid.yaml up -d",
+    "down:mermaid": "docker compose -f docker/compose.mermaid.yaml down"
+  }
+}

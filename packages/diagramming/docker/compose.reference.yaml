@@ -1,0 +1,53 @@
+services:
+  kroki:
+    image: yuzutech/kroki
+    container_name: kroki_container
+    depends_on:
+      - mermaid
+      - bpmn
+      - excalidraw
+      - diagramsnet
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+      - KROKI_BPMN_HOST=bpmn
+      - KROKI_EXCALIDRAW_HOST=excalidraw
+      - KROKI_DIAGRAMSNET_HOST=diagramsnet
+    ports:
+      - "8090:8000"
+    tmpfs:
+      - /tmp:exec
+    networks:
+      - krokinet
+
+  mermaid:
+    image: yuzutech/kroki-mermaid
+    container_name: kroki_mermaid_container
+    expose:
+      - "8002"
+    networks:
+      - krokinet
+
+  bpmn:
+    image: yuzutech/kroki-bpmn
+    container_name: kroki_bpmn_containerdocker 
+    expose:
+      - "8003"
+    networks:
+      - krokinet
+
+  excalidraw:
+    image: yuzutech/kroki-excalidraw
+    expose:
+      - "8004"
+    networks:
+      - krokinet
+
+  diagramsnet:
+    image: yuzutech/kroki-diagramsnet
+    expose:
+      - "8005"
+    networks:
+      - krokinet
+networks:
+  krokinet:
+    name: krokinet

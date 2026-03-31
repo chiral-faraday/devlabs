@@ -1,0 +1,12 @@
+services:
+  kroki:
+    image: yuzutech/kroki
+    ports:
+      - "8090:8000"
+    tmpfs:
+      - /tmp:exec
+    networks:
+      - krokinet
+networks:
+  krokinet:
+    external: true

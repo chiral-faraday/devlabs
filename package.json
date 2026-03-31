@@ -1,0 +1,17 @@
+{
+  "name": "@chiral/devlabs",
+  "version": "0.0.0",
+  "license": "MIT",
+  "scripts": {
+    "build:diagramming:lab": "nx run diagramming:build"
+  },
+  "private": true,
+  "dependencies": {},
+  "devDependencies": {
+    "@nx/js": "22.6.3",
+    "nx": "22.6.3"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

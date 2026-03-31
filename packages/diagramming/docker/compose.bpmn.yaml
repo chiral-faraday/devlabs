@@ -1,0 +1,19 @@
+services:
+  kroki:
+    extends:
+      file: ./compose.yaml
+      service: kroki
+    environment:
+      KROKI_BPMN_HOST: bpmn
+    depends_on:
+      - bpmn
+  bpmn:
+    container_name: kroki-bpmn-container
+    image: yuzutech/kroki-bpmn
+    expose:
+      - "8003"
+    networks:
+      - krokinet
+networks:
+  krokinet:
+    external: true
